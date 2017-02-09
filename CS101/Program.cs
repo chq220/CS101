@@ -60,7 +60,7 @@ namespace CS101
             char dot = '.';
             char star = '☆';
             char space = ' ';
-            char seprator = '\n';
+            char seprator = ' ';
                 
             Console.WriteLine("IsLetter方法判断a是否为字母:{0}", Char.IsLetter(a));
             Console.WriteLine("IsLetterOrDigit方法判断M是否为字母或者数字{0}", Char.IsLetterOrDigit(M));
@@ -73,7 +73,56 @@ namespace CS101
             Console.WriteLine("IsSeparator方法判断变量seprator是否为分割符{0}", Char.IsSeparator(seprator));
             return;
         }
+
+        public static void ConsoleStringEquals()
+        {
+            string str1 = "Hello World!";
+            string str2 = "HelloWorld!";
+            Console.WriteLine("str1和str2是否相同：{0}", str1.Equals(str2));
+            return;
+        }
+
+        public delegate void SayDelegate(string name);
+
+        public static void ConsoleDelegate()
+        {
+            DelegateClass dc = new DelegateClass();
+            SayDelegate sayDelegate1 = new SayDelegate(dc.ChineseSay);
+            SayDelegate sayDelegate2 = dc.EnglishSay;
+            SayDelegate sayDelegate3 = dc.JapaneseSay;
+            dc.Say("李菁", sayDelegate1);
+            dc.Say("Guo Degang", sayDelegate2);
+            dc.Say("ゆけ", sayDelegate3);
+            return;
+        }
+
+        public class DelegateClass
+        {
+            public void ChineseSay(string name)
+            {
+                Console.WriteLine("你好,{0}", name);
+                Console.WriteLine();
+            }
+
+            public void EnglishSay(string name)
+            {
+                Console.WriteLine("Hello,{0}", name);
+                Console.WriteLine();
+            }
+
+            public void JapaneseSay(string name)
+            {
+                Console.WriteLine($"こんにちは,{name}");
+                Console.WriteLine();
+            }
+
+            public void Say(string name, SayDelegate sayDelegate)
+            {
+                sayDelegate(name);
+            }
+        }
     }
+
     class Program
     {
         static void Main(string[] args)
@@ -82,6 +131,9 @@ namespace CS101
             CSBasic.CalcCircle();
             //CSBasic.ConsoleArithmeticOperatiors();
             CSBasic.ConsoleCharClass();
+            CSBasic.ConsoleStringEquals();
+            CSBasic.ConsoleDelegate();
+        
             Console.ReadLine();
         }
     }
